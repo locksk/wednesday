@@ -8,10 +8,17 @@ library(googlesheets4)
 library(shinyWidgets)
 library(shinyjs)
 library(data.table)
+library(googledrive)
+library(gargle)
+library(shinylive)
+library(httpuv)
 
 # load data
 #setwd(dir = "D:/siobh/Documents/Uni/PhD/Misc/wednesday/")
 #dat <- readxl::read_xlsx(path = "data.xlsx")
+drive_auth(path = ".secrets/wednesday-447408-55ba7ae3d65c.json")
+gs4_auth(path = ".secrets/wednesday-447408-55ba7ae3d65c.json")
+
 main <- read_sheet("https://docs.google.com/spreadsheets/d/1PMq5uXQ4matv8rvERxLlRF4BR6VBzMC464JIGATqYlg/edit?gid=0#gid=0",sheet = 1)
 now <- weekdays(Sys.Date())
 main <- main %>% filter(!grepl(now, Closed))
